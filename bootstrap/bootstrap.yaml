@@ -4,11 +4,11 @@ resources:
   - name: domtest-pipeline
     type: git
     icon: github
-    check_every: 15m
+    check_every: 1m
     source:
       uri: https://github.com/dcd-22/dominique-test-pipeline.git
       branch: main
-      token: ((mytoken))
+      private_key: ((mytoken))
 
 
 jobs:
