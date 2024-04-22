@@ -8,6 +8,7 @@ resources:
     source:
       uri: https://github.com/dcd-22/dominique-test-pipeline.git
       branch: main
+      username: dcd-22
       token: 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
 
 
