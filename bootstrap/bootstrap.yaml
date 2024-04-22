@@ -1,0 +1,22 @@
+
+#get the repo
+resources:
+  - name: domtest-pipeline
+    type: git
+    icon: github
+    check_every: 15m
+    source:
+      uri: https://github.com/dcd-22/dominique-test-pipeline.git
+      branch: main
+      token: ((mytoken))
+
+
+jobs:
+  - name: set-pipeline
+    plan:
+      - get: domtest-pipeline
+        trigger: true
+      - set_pipeline: hello-world
+        file: domtest-pipeline/pipelines/pipeline.yaml
+        vars:
+          NAME: "dominique"

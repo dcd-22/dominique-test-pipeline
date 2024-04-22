@@ -1,0 +1,22 @@
+resources:
+- name: domtest-pipeline
+  type: git
+  icon: github
+  check_every: 1h
+  source:
+    uri: https://github.com/dcd-22/dominique-test-pipeline.git
+    private_key: ((mytoken))
+    branch: main
+    paths:
+    - pipelines/pipeline.yaml
+    - tasks/hello-world.yaml
+    - tasks/scripts/hello-world.sh
+
+
+jobs:
+  - name: dominique-test
+    plan:
+      - get: domtest-pipeline
+        trigger: true
+      - task: hello-world
+        file: tasks/hello-world.yml
