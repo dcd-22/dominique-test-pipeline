@@ -19,4 +19,4 @@ jobs:
       - get: domtest-pipeline
         trigger: true
       - task: hello-world
-        file: tasks/hello-world.yml
+        file: tasks/hello-world.yaml
