@@ -10,7 +10,6 @@ image_resource:
 
 inputs:
   - name: domtest-pipeline
-  - name: input
 
 run:
   path: domtest-pipeline/tasks/scripts/hello-world.sh
