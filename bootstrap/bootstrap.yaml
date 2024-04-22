@@ -8,7 +8,7 @@ resources:
     source:
       uri: https://github.com/dcd-22/dominique-test-pipeline.git
       branch: main
-      private_key: ((mytoken))
+      private_key: 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
 
 
 jobs:
