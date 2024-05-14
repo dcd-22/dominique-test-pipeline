@@ -14,22 +14,24 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up GitHub CLI
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+        run: sudo apt-get install gh
       
       - name: Authenticate with GitHub CLI
         run: echo "$GH_TOKEN" | gh auth login --with-token
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Close Done Issues
+      - name: List and Close Done Issues
         run: |
-          # List all open issues with the 'done' label
-          ISSUES=$(gh issue list --label "done" --state closed --json number --jq '.[].number')
-          echo "$ISSUES"
-
-          # Close each issue with the 'done' label
-          for issue in $issues; do
+          # List all open issues
+          issues=$(gh issue list --state open --json number,title,body --jq '.[] | select(.title | test("done"; "i")) | "\(.number): \(.title)"')
+          
+          # Echo the issues to be closed
+          echo "The following issues will be closed:"
+          echo "$issues"
+          
+          # Close each issue with 'done' in the title
+          for issue in $(echo "$issues" | cut -d: -f1); do
             gh issue close $issue -c "Closed automatically by GitHub Action because it was marked as done."
           done
+
