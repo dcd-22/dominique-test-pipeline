@@ -27,7 +27,8 @@ jobs:
         run: |
           # List all open issues with the 'done' label
           issues=$(gh issue list --label "done" --state closed --json number --jq '.[].number')
-          
+          printenv issues
+
           # Close each issue with the 'done' label
           for issue in $issues; do
             gh issue close $issue -c "Closed automatically by GitHub Action because it was marked as done."
