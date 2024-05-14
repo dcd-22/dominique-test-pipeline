@@ -26,8 +26,8 @@ jobs:
       - name: Close Done Issues
         run: |
           # List all open issues with the 'done' label
-          issues=$(gh issue list --label "done" --state closed --json number --jq '.[].number')
-          printenv issues
+          ISSUES=$(gh issue list --label "done" --state closed --json number --jq '.[].number')
+          echo "$ISSUES"
 
           # Close each issue with the 'done' label
           for issue in $issues; do
