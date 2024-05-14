@@ -1,5 +1,6 @@
 name: Close Done Tickets on Friday Evening
-on:
+on: workflow_dispatch
+
   schedule:
     - cron: '0 16 * * 2' # Runs at 5 PM every Friday
 jobs:
