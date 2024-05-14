@@ -1,37 +1,16 @@
-name: Close Done Issues on Friday Evening
+name: Move new issues into Triage
 
-on:
-  schedule:
-    - cron: '0 17 * * 5' # Runs at 5 PM UTC every Friday
-  workflow_dispatch: # Allows for manual triggering
+on: workflow_dispatch
+  issues:
+    types: [closed]
 
 jobs:
-  close_issues:
+  automate-project-columns:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up GitHub CLI
-        run: sudo apt-get install gh
-      
-      - name: Authenticate with GitHub CLI
-        run: echo "$GH_TOKEN" | gh auth login --with-token
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: List and Close Done Issues
-        run: |
-          # List all open issues
-          issues=$(gh issue list --state open --json number,title,body --jq '.[] | select(.title | test("done"; "i")) | "\(.number): \(.title)"')
-          
-          # Echo the issues to be closed
-          echo "The following issues will be closed:"
-          echo "$issues"
-          
-          # Close each issue with 'done' in the title
-          for issue in $(echo "$issues" | cut -d: -f1); do
-            gh issue close $issue -c "Closed automatically by GitHub Action because it was marked as done."
-          done
+      - uses: alex-page/github-project-automation-plus@v0.8.3
+        with:
+          project: Done
+          column: Closed
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
