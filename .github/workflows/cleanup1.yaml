@@ -3,6 +3,7 @@ name: Move new issues into Triage
 on: 
   issues:
     types: [closed]
+  workflow_dispatch:
 
 jobs:
   automate-project-columns:
