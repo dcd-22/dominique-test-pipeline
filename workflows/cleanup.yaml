@@ -1,0 +1,15 @@
+name: Close Done Tickets on Friday Evening
+on:
+  schedule:
+    - cron: '0 17 * * 5' # Runs at 5 PM every Friday
+jobs:
+  close_tickets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Close Done Tickets
+        run: |
+          hub issue list --state closed -L 100 -f "%I %s" | grep 'done' | awk '{print $1}' | xargs -I % hub issue close %
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
