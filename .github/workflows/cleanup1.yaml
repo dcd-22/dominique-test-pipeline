@@ -1,8 +1,5 @@
 name: Close Done Tickets on Friday Evening
 on: workflow_dispatch
-
-  schedule:
-    - cron: '0 16 * * 2' # Runs at 5 PM every Friday
 jobs:
   close_tickets:
     runs-on: ubuntu-latest
