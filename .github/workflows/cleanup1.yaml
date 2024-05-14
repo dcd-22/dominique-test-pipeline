@@ -1,6 +1,6 @@
 name: Move new issues into Triage
 
-on: workflow_dispatch
+on: 
   issues:
     types: [closed]
 
