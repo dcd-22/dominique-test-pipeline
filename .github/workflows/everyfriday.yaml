@@ -1,0 +1,31 @@
+name: Clean up every friday 
+
+on:
+  workflow_dispatch:  
+  schedule:
+    - cron: '0 20 * * 5'  # Runs at 20:00 UTC every Friday
+
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd scripts  # Change directory to the scripts folder
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        env:
+          API_SECRET: ${{ secrets.API_SECRET }}  
+        run: |
+          python scripts/your_script.py 
