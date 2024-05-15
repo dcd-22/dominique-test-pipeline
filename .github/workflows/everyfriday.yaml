@@ -28,4 +28,4 @@ jobs:
         env:
           API_SECRET: ${{ secrets.API_SECRET }}  
         run: |
-          python scripts/your_script.py 
+          python scripts/everyfriday.py
