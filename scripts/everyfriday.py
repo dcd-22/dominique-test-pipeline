@@ -40,12 +40,12 @@ def extract_issue_ids(response_json):
 # Query to fetch issues
 issues_id_request = """
     query {
-        node(id: "PVT_kwHOByQZQ84AhpCG") {
+        node(id: "PVT_kwHOByQZQ84AhpCG") { 
             ... on ProjectV2 {
                 id
                 number
                 createdAt
-                items(first:50) {
+                items(last:100) {
                     nodes {
                         id
                         content {
