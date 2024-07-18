@@ -24,8 +24,8 @@ jobs:
           cd scripts  # Change directory to the scripts folder
           pip install -r requirements.txt
 
-      - name: Run Python script
+      - name: Check if today is sprint end and run script if true
         env:
           API_SECRET: ${{ secrets.API_SECRET }}  
         run: |
-          python scripts/everyfriday.py
+          python scripts/check_sprint_end_and_run.py
